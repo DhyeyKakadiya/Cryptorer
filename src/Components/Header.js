@@ -65,7 +65,7 @@ const Header = () => {
             <Typography
               onClick={() => navigate("/")}
               sx={styles.title}
-              variant="h4"
+              variant="h5"
             >
               Cryptorer
             </Typography>
