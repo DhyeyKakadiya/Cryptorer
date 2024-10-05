@@ -5,14 +5,14 @@ import { TrendingCoins } from '../../config/api';
 import {CryptoState} from '../../CryptoContext';
 import AliceCarousel from "react-alice-carousel";
 import { Link } from 'react-router-dom';
-// import { numberWithCommas } from "../CoinsTable";
-
 
   const useStyles = makeStyles((theme) => ({
     carousel: {
       height: "50%",
       display: "flex",
       alignItems: "center",
+      backgroundColor: (props) => (props.darkMode ? "#16171a" : "#fff"),
+      color: (props) => (props.darkMode ? "#fff" : "#000"),
     },
     carouselItem: {
       display: "flex",
@@ -33,22 +33,21 @@ import { Link } from 'react-router-dom';
 const Carousel = () => {
 
   const [trending, setTrending] = useState([]);
-const { currency, symbol } = CryptoState();
+  const { currency, symbol, darkMode } = CryptoState();
 
-const fetchTrendingCoins = async () => {
+  const fetchTrendingCoins = async () => {
     const { data } = await axios.get(TrendingCoins(currency));
 
     console.log(data);
     setTrending(data);
-};
-console.log(trending)
+  };
 
 useEffect(() => {
   fetchTrendingCoins();
   // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [currency]);
 
-  const styles = useStyles();
+  const styles = useStyles({ darkMode });
 
   const items = trending.map((coin) => {
     let profit = coin?.price_change_percentage_24h >= 0;
@@ -61,7 +60,7 @@ useEffect(() => {
           height="80"
           style={{ marginBottom: 10 }}
         />
-        <span className='sol'>
+        <span className='sol'style={{ color: darkMode ? "#fff" : "#000" }}>
           {coin?.symbol}
           &nbsp;
           <span
@@ -74,7 +73,7 @@ useEffect(() => {
             {coin?.price_change_percentage_24h?.toFixed(2)}%
           </span>
         </span>
-        <span style={{ fontSize: 22, fontWeight: 500 }}>
+        <span style={{ fontSize: 22, fontWeight: 500, color: darkMode ? "#fff" : "#000"}}>
           {symbol} {numberWithCommas(coin?.current_price.toFixed(2))}
         </span>
       </Link>

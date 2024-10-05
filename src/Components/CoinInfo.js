@@ -8,29 +8,14 @@ import { CategoryScale } from "chart.js";
 import { Chart } from "chart.js/auto";
 import SelectButton from "./SelectButton";
 import { chartDays } from "../config/data";
-// import { makeStyles } from "mui-styles-hook";
-
 
 Chart.register(CategoryScale);
 
 const CoinInfo = ({ coin }) => {
   const [historicData, setHistoricData] = useState([]);
   const [days, setDays] = useState(1);
-  const { currency } = CryptoState();
+  const { currency, darkMode } = CryptoState();
   const [flag, setflag] = useState(false);
-
-  // const useStyles = makeStyles((theme) => ({
-  //   graph: {
-  //     [theme.breakpoints.down("md")]: {
-  //       width: "100%",
-  //       marginTop: 0,
-  //       padding: 20,
-  //       paddingTop: 0,
-  //     },
-  //   },
-  // }));
-  // const classes = useStyles();
-
  
   const fetchHistoricData = async () => {
     const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
@@ -45,7 +30,7 @@ const CoinInfo = ({ coin }) => {
 
   const darkTheme = createTheme({
     palette: {
-      mode: "dark",
+      mode: darkMode ? "dark" : "light",
     },
   });
 
@@ -53,6 +38,10 @@ const CoinInfo = ({ coin }) => {
     <ThemeProvider theme={darkTheme}>
       <div
       className='graph'
+      style={{
+        backgroundColor: darkMode ? "#14161a" : "#fff",
+        color: darkMode ? "#fff" : "#000",
+      }}
       >
         {!historicData | (flag === false) ? (
           <CircularProgress

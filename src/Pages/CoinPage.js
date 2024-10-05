@@ -5,7 +5,7 @@ import axios from "axios";
 import { SingleCoin } from "../config/api";
 import { makeStyles } from "mui-styles-hook";
 import CoinInfo from '../Components/CoinInfo';
-import { LinearProgress, Typography } from '@mui/material';
+import { LinearProgress, Typography, Box } from '@mui/material';
 import { numberWithCommas } from "../Components/CoinsTable";
 import parse from "html-react-parser";
 
@@ -14,7 +14,7 @@ const CoinPage = () => {
   const { id } = useParams();
   const [coin,setCoin] = useState();
 
-  const {currency, symbol} = CryptoState();
+  const {currency, symbol, darkMode} = CryptoState();
 
   const fetchCoins = async() => {
     const {data} = await axios.get(SingleCoin(id));
@@ -24,6 +24,8 @@ const CoinPage = () => {
   const useStyles = makeStyles((theme) => ({
     container: {
       display: "flex",
+      backgroundColor: darkMode ? "#14161a" : "#fff",
+      color: darkMode ? "#fff" : "#000",
       [theme.breakpoints.down("md")]: {
         flexDirection: "column",
         alignItems: "center",
@@ -61,7 +63,10 @@ const CoinPage = () => {
   return (
     <div
       sx={classes.container}
-      style={{ display: "flex" }}
+      style={{ display: "flex", 
+        backgroundColor: darkMode ? "#14161a" : "#ffffff",
+        color: darkMode ? "#fff" : "#000", 
+      }}
       className="graphcontainer"
     >
       <div className="sidebar">
@@ -78,6 +83,7 @@ const CoinPage = () => {
           style={{
             fontWeight: "bold",
             marginBottom: 20,
+            textAlign: "center",
             fontFamily: "Montserrat",
           }}
         >
@@ -175,6 +181,14 @@ const CoinPage = () => {
           </span>
         </div>
       </div>
+      <Box
+        sx={{
+          width: "1px",
+          backgroundColor: darkMode ? "hsla(210, 14%, 28%, 0.3)" : "hsl(215, 15%, 92%)",
+          height: "auto",
+          margin: "0 20px",
+        }}
+      />
       <CoinInfo coin={coin} />
     </div>
   );
