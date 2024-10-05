@@ -1,4 +1,4 @@
 # Cryptorer
-## https://cyptorer.netlify.app/
+## https://cryptorer.netlify.app/
 
 Complete React js crypto website.
