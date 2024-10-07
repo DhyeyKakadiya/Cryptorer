@@ -5,7 +5,7 @@ import axios from "axios";
 import { SingleCoin } from "../config/api";
 import { makeStyles } from "mui-styles-hook";
 import CoinInfo from '../Components/CoinInfo';
-import { LinearProgress, Typography, Box } from '@mui/material';
+import { LinearProgress, Typography, Box, useMediaQuery  } from '@mui/material';
 import { numberWithCommas } from "../Components/CoinsTable";
 import parse from "html-react-parser";
 
@@ -13,9 +13,8 @@ const CoinPage = () => {
 
   const { id } = useParams();
   const [coin,setCoin] = useState();
-
   const {currency, symbol, darkMode} = CryptoState();
-
+  const isMobile = useMediaQuery("(max-width:600px)");
   const fetchCoins = async() => {
     const {data} = await axios.get(SingleCoin(id));
     setCoin(data);
@@ -77,7 +76,7 @@ const CoinPage = () => {
           style={{ marginBottom: 20 }}
         />
         <Typography
-          variant="h3"
+          variant="h4"
           sx={classes.heading}
           //heading
           style={{
@@ -112,6 +111,7 @@ const CoinPage = () => {
                 fontWeight: "bold",
                 marginBottom: 20,
                 fontFamily: "Montserrat",
+                fontSize: isMobile ? "1.2rem" : "1.25rem",
               }}
             >
               Rank:
@@ -121,6 +121,7 @@ const CoinPage = () => {
               variant="h5"
               style={{
                 fontFamily: "Montserrat",
+                fontSize: isMobile ? "1.2rem" : "1.25rem",
               }}
             >
               {numberWithCommas(coin?.market_cap_rank)}
@@ -134,6 +135,7 @@ const CoinPage = () => {
                 fontWeight: "bold",
                 marginBottom: 20,
                 fontFamily: "Montserrat",
+                fontSize: isMobile ? "1.2rem" : "1.25rem",
               }}
             >
               Current Price:
@@ -143,6 +145,7 @@ const CoinPage = () => {
               variant="h5"
               style={{
                 fontFamily: "Montserrat",
+                fontSize: isMobile ? "1.2rem" : "1.25rem",
               }}
             >
               {symbol}{" "}
@@ -159,6 +162,7 @@ const CoinPage = () => {
                 fontWeight: "bold",
                 marginBottom: 20,
                 fontFamily: "Montserrat",
+                fontSize: isMobile ? "1.2rem" : "1.25rem",
               }}
             >
               Market Cap:
@@ -168,6 +172,7 @@ const CoinPage = () => {
               variant="h5"
               style={{
                 fontFamily: "Montserrat",
+                fontSize: isMobile ? "1.2rem" : "1.25rem",
               }}
             >
               {symbol}{" "}

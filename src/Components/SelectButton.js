@@ -4,6 +4,7 @@ const SelectButton = ({ children, selected, onClick }) => {
       onClick={onClick}
       style={{
         border: "1px solid #3399ff",
+        display: "flex",
         borderRadius: 5,
         padding: 10,
         alignItems: "center",

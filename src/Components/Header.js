@@ -30,7 +30,6 @@ const useStyles = makeStyles({
   },
   horizontalLine: (darkMode) => ({
     borderBottom: darkMode ? "1px solid hsla(210, 14%, 28%, 0.3)" : "1px solid hsl(215, 15%, 92%)",
-    marginTop: 1,
     width: '100%',
   }),
 });

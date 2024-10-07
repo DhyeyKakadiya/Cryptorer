@@ -46,7 +46,7 @@ const CoinInfo = ({ coin }) => {
         {!historicData | (flag === false) ? (
           <CircularProgress
             style={{ color: "#3399ff" }}
-            size={250}
+            size={100}
             thickness={1}
           />
         ) : (
